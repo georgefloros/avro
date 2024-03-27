@@ -58,6 +58,8 @@ pub(crate) fn encode_internal<S: Borrow<Schema>>(
     enclosing_namespace: &Namespace,
     buffer: &mut Vec<u8>,
 ) -> AvroResult<()> {
+    println!("encode_internal schema: {:?}", schema);
+    println!("encode_internal value: {:?}", value);
     if let Schema::Ref { ref name } = schema {
         let fully_qualified_name = name.fully_qualified_name(enclosing_namespace);
         let resolved = names
@@ -105,7 +107,6 @@ pub(crate) fn encode_internal<S: Borrow<Schema>>(
                 }
                 Schema::Bytes => encode(&Value::Bytes(decimal.try_into()?), inner, buffer)?,
                 _ => {
-                    print!("Value::Decimal ERROR");
                     return Err(Error::ResolveDecimalSchema(SchemaKind::from(
                         *inner.clone(),
                     )));
