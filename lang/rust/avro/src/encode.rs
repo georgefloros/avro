@@ -105,6 +105,7 @@ pub(crate) fn encode_internal<S: Borrow<Schema>>(
                 }
                 Schema::Bytes => encode(&Value::Bytes(decimal.try_into()?), inner, buffer)?,
                 _ => {
+                    print!("Value::Decimal ERROR");
                     return Err(Error::ResolveDecimalSchema(SchemaKind::from(
                         *inner.clone(),
                     )));
