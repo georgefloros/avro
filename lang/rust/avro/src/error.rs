@@ -113,6 +113,9 @@ pub enum Error {
     #[error("Scale {scale} is greater than precision {precision}")]
     GetScaleAndPrecision { scale: usize, precision: usize },
 
+    #[error("Scale is greater than  {scale}")]
+    GetInvalidScale { scale: usize },
+
     #[error(
         "Fixed type number of bytes {size} is not large enough to hold decimal values of precision {precision}"
     )]
